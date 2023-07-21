@@ -23,7 +23,7 @@ done
 POD_NAME=$(kubectl get pods | grep "mongocfg1" | awk '{print $1;}')
 echo "Initializating config replica set... connecting to: $POD_NAME"
 CMD='rs.initiate({ _id : "cfgrs", configsvr: true, members: [{ _id : 0, host : "mongocfg1:27019" },{ _id : 1, host : "mongocfg2:27019" },{ _id : 2, host : "mongocfg3:27019" }]})'
-kubectl exec -it $POD_NAME -- bash -c "mongo --port 27019 --eval '$CMD'"
+kubectl exec -it $POD_NAME -- bash -c "mongosh --port 27019 --eval '$CMD'"
 
 
 
@@ -56,7 +56,7 @@ for ((rs=1; rs<=$SHARD_REPLICA_SET; rs++)) do
     CMD="rs.initiate({ _id : \"rs$rs\", members: [{ _id : 0, host : \"mongosh$rs-1:27017\" },{ _id : 1, host : \"mongosh$rs-2:27017\" },{ _id : 2, host : \"mongosh$rs-3:27017\" }]})"
     #Executing cmd inside pod
     echo $CMD
-    kubectl exec -it $POD_NAME -- bash -c "mongo --eval '$CMD'"
+    kubectl exec -it $POD_NAME -- bash -c "mongosh --eval '$CMD'"
 
 done
 
@@ -84,7 +84,7 @@ for ((rs=1; rs<=$SHARD_REPLICA_SET; rs++)) do
     CMD="sh.addShard(\"rs$rs/mongosh$rs-1:27017\")"
     #Executing cmd inside pod
     echo $CMD
-    kubectl exec -it $POD_NAME -- bash -c "mongo --eval '$CMD'"
+    kubectl exec -it $POD_NAME -- bash -c "mongosh --eval '$CMD'"
 
 done
 
