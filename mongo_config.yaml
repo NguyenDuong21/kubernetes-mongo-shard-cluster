@@ -29,7 +29,7 @@ spec:
       restartPolicy: Always
       hostname: mongocfg1
       containers:
-      - image: mongo:latest
+      - image: mongodb/mongodb-enterprise-server
         name: mongocfg1
         ports:
         - name: mongocfg1
@@ -75,7 +75,7 @@ spec:
       restartPolicy: Always
       hostname: mongocfg2
       containers:
-      - image: mongo:latest
+      - image: mongodb/mongodb-enterprise-server
         name: mongocfg2
         ports:
         - name: mongocfg2
@@ -121,7 +121,7 @@ spec:
       restartPolicy: Always
       hostname: mongocfg3
       containers:
-      - image: mongo:latest
+      - image: mongodb/mongodb-enterprise-server
         name: mongocfg3
         ports:
         - name: mongocfg3

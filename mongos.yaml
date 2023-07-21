@@ -26,7 +26,7 @@ spec:
       restartPolicy: Always
       hostname: mongos1
       containers:
-      - image: mongo:latest
+      - image: mongodb/mongodb-enterprise-server
         name: mongos1
         ports:
         - name: mongos1
@@ -69,7 +69,7 @@ spec:
       restartPolicy: Always
       hostname: mongos1
       containers:
-      - image: mongo:latest
+      - image: mongodb/mongodb-enterprise-server
         name: mongos2
         ports:
         - name: mongos2

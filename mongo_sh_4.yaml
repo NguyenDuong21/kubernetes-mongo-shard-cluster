@@ -27,7 +27,7 @@ spec:
       restartPolicy: Always
       hostname: mongosh4-1
       containers:
-      - image: mongo:latest
+      - image: mongodb/mongodb-enterprise-server
         name: mongosh4-1
         ports:
         - name: mongosh4-1
@@ -71,7 +71,7 @@ spec:
       restartPolicy: Always
       hostname: mongosh4-2
       containers:
-      - image: mongo:latest
+      - image: mongodb/mongodb-enterprise-server
         name: mongosh4-2
         ports:
         - name: mongosh4-2
@@ -115,7 +115,7 @@ spec:
       restartPolicy: Always
       hostname: mongosh4-3
       containers:
-      - image: mongo:latest
+      - image: mongodb/mongodb-enterprise-server
         name: mongosh4-3
         ports:
         - name: mongosh4-3
