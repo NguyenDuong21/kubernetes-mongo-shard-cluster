@@ -18,6 +18,9 @@ metadata:
   name: mongosh2-1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      run: mongosh2-1
   template:
     metadata:
       labels:
@@ -62,6 +65,9 @@ metadata:
   name: mongosh2-2
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      run: mongosh2-2
   template:
     metadata:
       labels:
@@ -106,6 +112,9 @@ metadata:
   name: mongosh2-3
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      run: mongosh2-3
   template:
     metadata:
       labels:
