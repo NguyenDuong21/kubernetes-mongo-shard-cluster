@@ -1,0 +1,259 @@
+# Mongo shard replica set 1 node 1
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongoreplicaset1
+  labels:
+    run: mongoreplicaset1
+spec:
+  ports:
+  - port: 27017
+    protocol: TCP
+  clusterIP: None
+  selector:
+    run: mongoreplicaset1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongoreplicaset1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: mongoreplicaset1
+  template:
+    metadata:
+      labels:
+        name: mongoreplicaset1
+        run: mongoreplicaset1
+    spec:
+      restartPolicy: Always
+      hostname: mongoreplicaset1
+      containers:
+      - image: mongodb/mongodb-enterprise-server
+        name: mongoreplicaset
+        ports:
+        - name: mongoreplicaset
+          containerPort: 27017
+        volumeMounts:
+            - name: mongoreplicaset1
+              mountPath: /data/db
+        command: ["mongod"]
+        args: ["--replSet", "rs1", "--storageEngine", "inMemory", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+  volumeClaimTemplates:
+  - metadata:
+      name: mongoreplicaset1
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+---
+# Mongo shard replica set 1 node 2
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongoreplicaset2
+  labels:
+    run: mongoreplicaset2
+spec:
+  ports:
+  - port: 27017
+    protocol: TCP
+  clusterIP: None
+  selector:
+    run: mongoreplicaset2
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongoreplicaset2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: mongoreplicaset2
+  template:
+    metadata:
+      labels:
+        name: mongoreplicaset2
+        run: mongoreplicaset2
+    spec:
+      restartPolicy: Always
+      hostname: mongoreplicaset
+      containers:
+      - image: mongodb/mongodb-enterprise-server
+        name: mongoreplicaset
+        ports:
+        - name: mongoreplicaset2
+          containerPort: 27017
+        volumeMounts:
+            - name: mongoreplicaset2
+              mountPath: /data/db
+        command: ["mongod"]
+        args: ["--replSet", "rs1", "--storageEngine", "inMemory", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+  volumeClaimTemplates:
+  - metadata:
+      name: mongoreplicaset2
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+---
+# Mongo shard replica set 1 node 3
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongoreplicaset3
+  labels:
+    run: mongoreplicaset3
+spec:
+  ports:
+  - port: 27017
+    protocol: TCP
+  clusterIP: None
+  selector:
+    run: mongoreplicaset3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongoreplicaset3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: mongoreplicaset3
+  template:
+    metadata:
+      labels:
+        name: mongoreplicaset3
+        run: mongoreplicaset3
+    spec:
+      restartPolicy: Always
+      hostname: mongoreplicaset3
+      containers:
+      - image: mongodb/mongodb-enterprise-server
+        name: mongoreplicaset3
+        ports:
+        - name: mongoreplicaset3
+          containerPort: 27017
+        volumeMounts:
+            - name: mongoreplicaset3
+              mountPath: /data/db
+        command: ["mongod"]
+        args: ["--replSet", "rs1", "--storageEngine", "inMemory", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+  volumeClaimTemplates:
+  - metadata:
+      name: mongoreplicaset3
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+---
+# Mongo shard replica set 1 node 3
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongoreplicaset4
+  labels:
+    run: mongoreplicaset4
+spec:
+  ports:
+  - port: 27017
+    protocol: TCP
+  clusterIP: None
+  selector:
+    run: mongoreplicaset4
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongoreplicaset4
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: mongoreplicaset4
+  template:
+    metadata:
+      labels:
+        name: mongoreplicaset4
+        run: mongoreplicaset4
+    spec:
+      restartPolicy: Always
+      hostname: mongoreplicaset4
+      containers:
+      - image: mongodb/mongodb-enterprise-server
+        name: mongoreplicaset4
+        ports:
+        - name: mongoreplicaset4
+          containerPort: 27017
+        volumeMounts:
+            - name: mongoreplicaset4
+              mountPath: /data/db
+        command: ["mongod"]
+        args: ["--replSet", "rs1", "--storageEngine", "wiredTiger", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+  volumeClaimTemplates:
+  - metadata:
+      name: mongoreplicaset4
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+---
+# Mongo shard replica set 1 node 3
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongoreplicaset5
+  labels:
+    run: mongoreplicaset5
+spec:
+  ports:
+  - port: 27017
+    protocol: TCP
+  clusterIP: None
+  selector:
+    run: mongoreplicaset5
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongoreplicaset5
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: mongoreplicaset5
+  template:
+    metadata:
+      labels:
+        name: mongoreplicaset5
+        run: mongoreplicaset5
+    spec:
+      restartPolicy: Always
+      hostname: mongoreplicaset5
+      containers:
+      - image: mongodb/mongodb-enterprise-server
+        name: mongoreplicaset5
+        ports:
+        - name: mongoreplicaset5
+          containerPort: 27017
+        volumeMounts:
+            - name: mongoreplicaset5
+              mountPath: /data/db
+        command: ["mongod"]
+        args: ["--replSet", "rs1", "--storageEngine", "wiredTiger", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+  volumeClaimTemplates:
+  - metadata:
+      name: mongoreplicaset5
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
