@@ -14,10 +14,11 @@ spec:
     run: mongoreplicaset1
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mongoreplicaset1
 spec:
+  serviceName: mongoreplicaset1
   replicas: 1
   selector:
     matchLabels:
@@ -34,7 +35,7 @@ spec:
       - image: mongodb/mongodb-enterprise-server
         name: mongoreplicaset
         ports:
-        - name: mongoreplicaset
+        - name: mongo
           containerPort: 27017
         volumeMounts:
             - name: mongoreplicaset1
@@ -66,10 +67,11 @@ spec:
     run: mongoreplicaset2
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mongoreplicaset2
 spec:
+  serviceName: mongoreplicaset2
   replicas: 1
   selector:
     matchLabels:
@@ -86,7 +88,7 @@ spec:
       - image: mongodb/mongodb-enterprise-server
         name: mongoreplicaset
         ports:
-        - name: mongoreplicaset2
+        - name: mongo
           containerPort: 27017
         volumeMounts:
             - name: mongoreplicaset2
@@ -118,10 +120,11 @@ spec:
     run: mongoreplicaset3
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mongoreplicaset3
 spec:
+  serviceName: mongoreplicaset3
   replicas: 1
   selector:
     matchLabels:
@@ -138,7 +141,7 @@ spec:
       - image: mongodb/mongodb-enterprise-server
         name: mongoreplicaset3
         ports:
-        - name: mongoreplicaset3
+        - name: mongo
           containerPort: 27017
         volumeMounts:
             - name: mongoreplicaset3
@@ -154,7 +157,7 @@ spec:
         requests:
           storage: 1Gi
 ---
-# Mongo shard replica set 1 node 3
+# Mongo shard replica set 1 node 4
 apiVersion: v1
 kind: Service
 metadata:
@@ -170,10 +173,11 @@ spec:
     run: mongoreplicaset4
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mongoreplicaset4
 spec:
+  serviceName: mongoreplicaset4
   replicas: 1
   selector:
     matchLabels:
@@ -190,7 +194,7 @@ spec:
       - image: mongodb/mongodb-enterprise-server
         name: mongoreplicaset4
         ports:
-        - name: mongoreplicaset4
+        - name: mongo
           containerPort: 27017
         volumeMounts:
             - name: mongoreplicaset4
@@ -222,10 +226,11 @@ spec:
     run: mongoreplicaset5
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mongoreplicaset5
 spec:
+  serviceName: mongoreplicaset5
   replicas: 1
   selector:
     matchLabels:
@@ -242,7 +247,7 @@ spec:
       - image: mongodb/mongodb-enterprise-server
         name: mongoreplicaset5
         ports:
-        - name: mongoreplicaset5
+        - name: mongo
           containerPort: 27017
         volumeMounts:
             - name: mongoreplicaset5
